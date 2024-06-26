@@ -1,6 +1,7 @@
 package com.example.busbookingbackend.controllers;
 
 import com.example.busbookingbackend.dto.LoginRequest;
+import com.example.busbookingbackend.dto.RoleRequest;
 import com.example.busbookingbackend.dto.SignupRequest;
 import com.example.busbookingbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,9 @@ public class AuthController {
     @PostMapping("/signup")
     public Long addNewCredentials(@RequestBody SignupRequest signupRequest) {
         return userService.SaveUser(signupRequest);
+    }
+    @PostMapping("/role")
+    public Long createRole(@RequestBody RoleRequest roleRequest) {
+        return userService.SaveRole(roleRequest).getId();
     }
 }
