@@ -13,8 +13,8 @@ import java.util.Set;
 @Setter
 public class Roles {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
     private Long id;
     private String name;
     @ManyToMany(mappedBy = "roles" )

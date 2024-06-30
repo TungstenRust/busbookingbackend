@@ -5,6 +5,7 @@ import com.example.busbookingbackend.dto.RoleRequest;
 import com.example.busbookingbackend.dto.SignupRequest;
 import com.example.busbookingbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,10 +20,12 @@ public class AuthController {
     @Autowired
     private UserService userService;
     @PostMapping("/login")
-    public Map<String, Object> validateCredentials(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<Map<String, Object>> validateCredentials(@RequestBody LoginRequest loginRequest) {
+        var userData= userService.GetUserByUsername(loginRequest);
         var data = new HashMap<String, Object>();
         data.put("status", "Success");
-        return data;
+        data.put("user", userData);
+        return ResponseEntity.ok().body(new HashMap<>(data));
     }
     @PostMapping("/signup")
     public Long addNewCredentials(@RequestBody SignupRequest signupRequest) {
